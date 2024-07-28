@@ -1,5 +1,5 @@
-const express = require('express');
-const path = require('path')
+import express from 'express';
+import { join } from 'path';
 
 const startServer = (options) => {
     const { port, public_path = 'public'} = options
@@ -9,7 +9,7 @@ const startServer = (options) => {
      app.use(express.static(public_path)); // contenido estatico que ponemos disponible
 
     app.get("*", (req, res)=>{
-        const indexPath = path.join(__dirname,`../../../${public_path}/index.html`)
+        const indexPath = join(__dirname,`../../../${public_path}/index.html`)
         res.sendFile(indexPath);
     })
 
@@ -19,6 +19,4 @@ const startServer = (options) => {
 
 }
 
-module.exports = {
-    startServer
-}
+export default startServer
